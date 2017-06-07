@@ -1,0 +1,26 @@
+@(users: Seq[models.User])(userForm: Form[models.User])(implicit messages: Messages)
+
+@main("List of Users") {
+	<h2>List of Users</h2>
+	<div class="panel panel-default">
+		<div class="panel-heading">Posts</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			@for(user <- users) {
+				<tr>
+					<td>@user.id</td>
+					<td>@user.firstName</td>
+					<td>@user.lastName</td>
+					<td>@user.email</td>
+				</tr>
+			}
+		</table>
+	</div>
+}

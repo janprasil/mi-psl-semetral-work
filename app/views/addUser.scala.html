@@ -1,0 +1,30 @@
+@(userForm: Form[models.User], result: models.User = null)(implicit messages: Messages)
+@main("Create new user") {
+    <h2>Create new user form</h2>
+
+    @if(result != null) {
+        <div class="alert alert-success" role="success">
+            <span class="glyphicon glyphicons-ok-circle" aria-hidden="true"></span>
+            <b>User has been created!</b>
+            <p>
+                Your API key for creating posts is:
+                <br /><b>@result.apiKey</b>
+            </p>
+        </div>
+    }
+
+    @if(userForm.hasGlobalErrors) {
+        @for(error <- userForm.globalErrors) {
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                @Messages(error.messages, error.args)
+            </div>
+        }
+    }
+    @helper.form(action = routes.UserController.addUser) {
+        @helper.inputText(userForm("email"), '_label -> "Email Address")
+        @helper.inputText(userForm("firstName"), '_label -> "First Name")
+        @helper.inputText(userForm("lastName"), '_label -> "Last Name")
+        <button class="btn btn-default" type="submit">Add User</button>
+    }
+}

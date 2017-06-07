@@ -1,0 +1,16 @@
+@(id: Int, wrongApiKey: Boolean = false)
+@main("Remove post") {
+    <h2>For removing this post, enter your API key in the form input below</h2>
+    @if(wrongApiKey == true) {
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <p>You probably entered wrong API key to delete this entry</p>
+        </div>
+    }
+
+    @helper.form(action = routes.PostController.removePostConfirm) {
+        <input type="text" name="apiKey" />
+        <input type="hidden" name="id" value="@id" />
+        <button class="btn btn-default" type="submit">Remove Blog Post</button>
+    }
+}

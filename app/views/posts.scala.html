@@ -1,0 +1,28 @@
+@(posts: Seq[models.Post])(implicit messages: Messages)
+@main("Blog Posts on this server") {
+    <h2>Posts on this server</h2>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Posts</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Detail</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            @for(post <- posts) {
+                <tr>
+                    <td>@post.id</td>
+                    <td>@post.title</td>
+                    <td>@post.description</td>
+                    <td><a href="@routes.PostController.postDetail(id = post.id.get)">Link</a></td>
+                    <td><a href="@routes.PostController.removePost(id = post.id.get)">Remove</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+}

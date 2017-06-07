@@ -1,0 +1,21 @@
+@(postForm: Form[models.Post])(implicit messages: Messages)
+@main("Create new blog post") {
+    <h2>Create new blog post form</h2>
+
+    @if(postForm.hasGlobalErrors) {
+        @for(error <- postForm.globalErrors) {
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                @Messages(error.messages, error.args)
+            </div>
+        }
+    }
+    @helper.form(action = routes.PostController.postPost) {
+        @helper.inputText(postForm("title"), '_label -> "Blog Post Title")
+        @helper.textarea(postForm("description"), '_label -> "First text")
+        @helper.textarea(postForm("text"), '_label -> "Main text")
+        @helper.textarea(postForm("userId.apiKey"), '_label -> "Your API key")
+
+        <button class="btn btn-default" type="submit">Create Blog Post</button>
+    }
+}

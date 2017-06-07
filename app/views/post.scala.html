@@ -1,0 +1,15 @@
+@(post: (models.Post, models.User))(implicit messages: Messages)
+
+@main(s"${post._1.title} | Post detail") {
+    <h2>@post._1.title</h2>
+
+    <p>
+        @post._1.description
+    </p>
+
+    <p>
+        @post._1.text
+    </p>
+
+    <b>Přidal: @post._2.email<b>
+}
